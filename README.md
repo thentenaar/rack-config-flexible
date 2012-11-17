@@ -76,8 +76,8 @@ Any calls to _set_ after _environment_ or _section_ will override
 data loaded from the yaml file if the same key is specified.
 Otherwise, they'll just add the values to the hash per usual.
 
-Loading the Entire Configuration from a Yaml
-============================================
+Loading the Entire Configuration from Yaml
+==========================================
 
 You can load the entire configuration from a single file, or a
 directory tree.
