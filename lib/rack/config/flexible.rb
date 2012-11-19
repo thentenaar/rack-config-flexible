@@ -9,7 +9,7 @@
 require 'yaml'
 
 module Rack
-module Config
+class Config
   #
   # === Overview
   #
@@ -132,18 +132,18 @@ module Config
       @values = {}
       raise ArgumentError.new('`options\' must be a Hash') unless options.is_a?(Hash)
 
-      if options.has_key?(:from_file) && File.directory?(options[:from_file])
+      if options.has_key?(:from_file) && ::File.directory?(options[:from_file])
         # Load from a directory tree
         Dir[options[:from_file] + '/*'].each { |env|
-          next unless File.directory?(env)
-          environment File.basename(env)
+          next unless ::File.directory?(env)
+          environment ::File.basename(env)
            
           Dir[env + '/*.yaml'].each { |sec|
-            next unless File.file?(sec)
-            section File.basename(sec,'.yaml'),sec
+            next unless ::File.file?(sec)
+            section ::File.basename(sec,'.yaml'),sec
           }
         }
-      elsif options.has_key?(:from_file) && File.exist?(options[:from_file])
+      elsif options.has_key?(:from_file) && ::File.exist?(options[:from_file])
         # Load from a single file
         @values = Hash[YAML.load_file(options[:from_file]).map { |k,v|
           [k.to_sym, Hash[v.map { |k,v| [ k.to_sym,v ]}]] if k.is_a?(String) && v.is_a?(Hash)
@@ -187,7 +187,7 @@ module Config
       @values[@env] = {} unless @values.has_key?(@env) && @values[@env].is_a?(Hash)
 
       # Load from a file, or hash, if specified
-      if data.is_a?(String) && File.exist?(data)
+      if data.is_a?(String) && ::File.exist?(data)
         @values[@env].merge!(Hash[YAML.load_file(data).map { |k,v| [k.to_sym, v] if k.is_a?(String) }])
         @sec = @values[@env].keys.last
       elsif data.is_a?(Hash)
@@ -212,7 +212,7 @@ module Config
       @values[@env][@sec].merge!(vals) if vals.is_a?(Hash)
 
       # If vals is a string, it's assumed to be a YAML file
-      @values[@env][@sec].merge!(YAML.load_file(vals)) if vals.is_a?(String) && File.exist?(vals)
+      @values[@env][@sec].merge!(YAML.load_file(vals)) if vals.is_a?(String) && ::File.exist?(vals)
     end
 
     # :category:DSL

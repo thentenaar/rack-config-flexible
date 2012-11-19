@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name        = 'rack-config-flexible'
-  gem.version     = '0.1.1'
+  gem.version     = '0.1.4'
   gem.author      = 'Tim Hentenaar'
   gem.email       = 'tim.hentenaar@gmail.com'
   gem.homepage    = 'https://github.com/thentenaar/rack-config-flexible'
