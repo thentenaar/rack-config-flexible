@@ -1,3 +1,11 @@
+#
+# Rack::Config::Flexible - Configuration middleware for Rack
+#
+# Copyright (C) 2012 Tim Hentenaar. All Rights Reserved.
+#
+# Licensed under the Simplified BSD License. 
+# See the LICENSE file for details.
+#
 require 'yaml'
 
 module Rack
