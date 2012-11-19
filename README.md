@@ -1,7 +1,8 @@
 rack-config-flexible
 ====================
 
-An alternative to Rack::Config, offering much greater flexibility.
+A flexible configuration middleware for Rack that provides a simple DSL, 
+as well as the ability to easily load configuration from yaml files.
 
 Licensing
 =========
@@ -93,7 +94,27 @@ use Rack::Config::Flexible :from_file => 'settings.yaml' do
 end
 ```
 
-This one from a directory tree:
+The _settings.yaml_ file should be laid out like:
+
+```yaml
+environment:
+  section:
+    key: value
+```
+
+So, the equivalent of the initial example would be:
+
+```yaml
+production:
+  data:
+    key: value
+
+development:
+  data:
+    key: dev_value
+```
+
+This example loads from a directory tree:
 
 ```ruby
 require 'rack/config/flexible'
@@ -110,7 +131,7 @@ The directory tree is expected to be laid out like:
 
 Where each directory under _settings_ is an _environment_, 
 containg a separate yaml file for each _section_. 
-The YAML file itself will only hold key-value pairs for
+The yaml file itself will only hold key-value pairs for
 that particular _section_.
 
 See the inline documentation for more details.
